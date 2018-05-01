@@ -1,5 +1,5 @@
-import { assert } from 'chai';
-import { randomValue as random, randomStringArray } from '../helper';
+import {assert} from 'chai';
+import {randomValue as random, randomStringArray} from '../helper';
 import {
     bindFunction,
     sumWithDefaults,
@@ -8,6 +8,25 @@ import {
     returnFirstArgument,
     returnFnResult
 } from '../src/index';
+
+// pow
+function pow(x, n) {
+    let result = x;
+
+    for (let i = 1; i < n; i++) {
+        result *= x;
+    }
+
+    return result;
+}
+
+describe("Мое задание", function () {
+    describe("pow", function () {
+        it("Возводит в n-ю степень", function () {
+            assert.equal(pow(2, 10), 1024);
+        })
+    });
+});
 
 describe('ДЗ 1 - функции', () => {
     describe('returnFirstArgument', () => {
