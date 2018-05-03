@@ -81,41 +81,41 @@ describe('ДЗ 2 - работа с исключениями и отладчик�
         });
     });
 
-    // describe('returnBadArguments', () => {
-    //     it('должна вызывать fn для всех элементов массива', () => {
-    //         let array = random('array', 1);
-    //         let pass = [];
-    //
-    //         returnBadArguments(e => pass.push(e), ...array);
-    //
-    //         assert.deepEqual(pass, array);
-    //     });
-    //
-    //     it('должна вернуть массив с аргументами, для которых fn выбрасила исключение', () => {
-    //         let evenNumbers = randomNumberArray('even');
-    //         let oddNumbers = randomNumberArray('odd');
-    //         let fn = a => {
-    //             if (a % 2 != 0) {
-    //                 throw new Error('not even');
-    //             }
-    //         };
-    //         let result = returnBadArguments(fn, ...evenNumbers, ...oddNumbers);
-    //
-    //         assert.deepEqual(result, oddNumbers);
-    //     });
-    //
-    //     it('должна вернуть массив пустой массив, если не передано дополнительных аргументов', () => {
-    //         let fn = () => ':)';
-    //         let result = returnBadArguments(fn);
-    //
-    //         assert.deepEqual(result, []);
-    //     });
-    //
-    //     it('должна выбросить исключение, если fn не функция', () => {
-    //         assert.throws(returnBadArguments.bind(null, ':('), 'fn is not a function');
-    //     });
-    // });
-    //
+    describe('returnBadArguments', () => {
+        it('должна вызывать fn для всех элементов массива', () => {
+            let array = random('array', 1);
+            let pass = [];
+
+            returnBadArguments(e => pass.push(e), ...array);
+
+            assert.deepEqual(pass, array);
+        });
+
+        it('должна вернуть массив с аргументами, для которых fn выбрасила исключение', () => {
+            let evenNumbers = randomNumberArray('even');
+            let oddNumbers = randomNumberArray('odd');
+            let fn = a => {
+                if (a % 2 != 0) {
+                    throw new Error('not even');
+                }
+            };
+            let result = returnBadArguments(fn, ...evenNumbers, ...oddNumbers);
+
+            assert.deepEqual(result, oddNumbers);
+        });
+
+        it('должна вернуть массив пустой массив, если не передано дополнительных аргументов', () => {
+            let fn = () => ':)';
+            let result = returnBadArguments(fn);
+
+            assert.deepEqual(result, []);
+        });
+
+        it('должна выбросить исключение, если fn не функция', () => {
+            assert.throws(returnBadArguments.bind(null, ':('), 'fn is not a function');
+        });
+    });
+
     // describe('calculator', () => {
     //     it('должна возвращать объект с методами', () => {
     //         let calc = calculator();
