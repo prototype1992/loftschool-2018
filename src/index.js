@@ -118,12 +118,37 @@ function calculator(number = 0) {
     }
     return {
         sum() {
+            let result = number;
+            for (let i = 0; i < arguments.length; i++) {
+                result += arguments[i];
+            }
+            return result;
         },
         dif() {
+            let result = number;
+            for (let i = 0; i < arguments.length; i++) {
+                result -= arguments[i];
+            }
+            return result;
         },
         div() {
+            let result = number;
+
+            for (let i = 0; i < arguments.length; i++) {
+                if (arguments[i] === 0) {
+                    throw new Error('division by 0');
+                }
+                result /= arguments[i];
+            }
+
+            return result;
         },
         mul() {
+            let result = number;
+            for (let i = 0; i < arguments.length; i++) {
+                result *= arguments[i];
+            }
+            return result;
         }
     };
 }
