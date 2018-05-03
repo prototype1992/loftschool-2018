@@ -48,39 +48,39 @@ describe('ДЗ 2 - работа с исключениями и отладчик�
         });
     });
 
-    // describe('isSomeTrue', () => {
-    //     it('должна вернуть true, если fn вернула true хотя бы для одного элемента массива', () => {
-    //         let array = randomStringArray().concat(random('number'));
-    //         let result = isSomeTrue(array, Number.isFinite);
-    //
-    //         assert.isTrue(result);
-    //     });
-    //
-    //     it('должна вернуть false, если fn не вернула true хотя бы для одного элемента массива', () => {
-    //         let array = randomStringArray();
-    //         let result = isSomeTrue(array, Number.isFinite);
-    //
-    //         assert.isFalse(result);
-    //     });
-    //
-    //     it('должна выбросить исключение, если передан пустой массив', () => {
-    //         assert.throws(isSomeTrue.bind(null, [], () => {
-    //         }), 'empty array');
-    //     });
-    //
-    //     it('должна выбросить исключение, если передан не массив', () => {
-    //         assert.throws(isSomeTrue.bind(null, ':(', () => {
-    //         }), 'empty array');
-    //         assert.throws(isSomeTrue.bind(null, {}), 'empty array');
-    //     });
-    //
-    //     it('должна выбросить исключение, если fn не функция', () => {
-    //         let array = randomNumberArray();
-    //
-    //         assert.throws(isSomeTrue.bind(null, array, ':('), 'fn is not a function');
-    //     });
-    // });
-    //
+    describe('isSomeTrue', () => {
+        it('должна вернуть true, если fn вернула true хотя бы для одного элемента массива', () => {
+            let array = randomStringArray().concat(random('number'));
+            let result = isSomeTrue(array, Number.isFinite);
+
+            assert.isTrue(result);
+        });
+
+        it('должна вернуть false, если fn не вернула true хотя бы для одного элемента массива', () => {
+            let array = randomStringArray();
+            let result = isSomeTrue(array, Number.isFinite);
+
+            assert.isFalse(result);
+        });
+
+        it('должна выбросить исключение, если передан пустой массив', () => {
+            assert.throws(isSomeTrue.bind(null, [], () => {
+            }), 'empty array');
+        });
+
+        it('должна выбросить исключение, если передан не массив', () => {
+            assert.throws(isSomeTrue.bind(null, ':(', () => {
+            }), 'empty array');
+            assert.throws(isSomeTrue.bind(null, {}), 'empty array');
+        });
+
+        it('должна выбросить исключение, если fn не функция', () => {
+            let array = randomNumberArray();
+
+            assert.throws(isSomeTrue.bind(null, array, ':('), 'fn is not a function');
+        });
+    });
+
     // describe('returnBadArguments', () => {
     //     it('должна вызывать fn для всех элементов массива', () => {
     //         let array = random('array', 1);
