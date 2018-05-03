@@ -35,12 +35,12 @@ function map(array, fn) {
  Посмотрите как работает reduce и повторите это поведение для массива, который будет передан в параметре array
  */
 function reduce(array, fn, initial) {
-    let init = initial ? initial : array[0];
+    let prevVal = initial ? initial : array[0];
     let i = initial ? 0 : 1;
     for (i; i < array.length; i++) {
-        init = fn(init, array[i], i, array);
+        prevVal = fn(prevVal, array[i], i, array);
     }
-    return init;
+    return prevVal;
 }
 
 /*
@@ -53,8 +53,6 @@ function reduce(array, fn, initial) {
  */
 function upperProps(obj) {
     let resultArray = [];
-
-    console.log('resultArray', resultArray);
 
     for (let i = 0; i < Object.keys(obj).length; i++) {
         resultArray.push(Object.keys(obj)[i].toUpperCase())
@@ -70,6 +68,44 @@ function upperProps(obj) {
  Посмотрите как работает slice и повторите это поведение для массива, который будет передан в параметре array
  */
 function slice(array, from, to) {
+    let result = [];
+
+    if (from < 0) {
+        from = array.length + from;
+    }
+
+    if (to < 0) {
+        to = array.length + to;
+    }
+
+    if (to > array.length) {
+        to = array.length;
+    }
+
+    if (to < 0) {
+        return [];
+    }
+
+    if (from < 0 && array.length + from < 0) {
+        from = 0;
+    }
+
+    if (from !== undefined && to !== undefined && from >= 0 && to >= 0) {
+        for (let i = from; i < to; i++) {
+            result.push(array[i]);
+        }
+
+        return result;
+    } else if (from !== undefined && to === undefined) {
+        for (let i = from; i < array.length; i++) {
+            result.push(array[i]);
+        }
+        return result;
+    }
+
+    else if (from === undefined && to === undefined) {
+        return array;
+    }
 }
 
 /*
@@ -79,6 +115,12 @@ function slice(array, from, to) {
  Proxy должен перехватывать все попытки записи значений свойств и возводить это значение в квадрат
  */
 function createProxy(obj) {
+    return new Proxy(obj, {
+        set(obj, prop, value) {
+            obj[prop] = value * value;
+            return true;
+        }
+    });
 }
 
 export {
