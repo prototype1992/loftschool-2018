@@ -109,135 +109,135 @@ describe('ДЗ 4 - Работа с DOM', () => {
         });
     });
 
-    // describe('collectDOMStat', () => {
-    //     it('должна вернуть статистику по переданному дереву', () => {
-    //         let where = document.createElement('div');
-    //         let class1 = `class-${random('number')}`;
-    //         let class2 = `class-${random('number')}-${random('number')}`;
-    //         let text1 = random('string');
-    //         let text2 = random('string');
-    //         let stat = {
-    //             tags: { P: 1, B: 2 },
-    //             classes: { [class1]: 2, [class2]: 1 },
-    //             texts: 3
-    //         };
-    //         let result;
-    //
-    //         where.innerHTML = `<p class="${class1}"><b>${text1}</b> <b class="${class1} ${class2}">${text2}</b></p>`;
-    //         result = collectDOMStat(where);
-    //         assert.deepEqual(result, stat);
-    //     });
-    // });
-    //
-    // describe('observeChildNodes', () => {
-    //     it('должна вызывать fn при добавлении элементов в указанный элемент', done => {
-    //         let where = document.createElement('div');
-    //         let fn = info => {
-    //             assert.isObject(info, 'info должен быть объектом');
-    //             assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-    //             assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-    //             assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-    //             assert.deepEqual(targetInfo.nodes, info.nodes);
-    //             done();
-    //         };
-    //         let elementToInsert = document.createElement('div');
-    //         let targetInfo = {
-    //             type: 'insert',
-    //             nodes: [elementToInsert]
-    //         };
-    //
-    //         document.body.appendChild(where);
-    //
-    //         observeChildNodes(where, fn);
-    //         where.appendChild(elementToInsert);
-    //
-    //         document.body.removeChild(where);
-    //     });
-    //
-    //     it('должна вызывать fn при добавлении множества элементов в указанный элемент', done => {
-    //         let where = document.createElement('div');
-    //         let fn = info => {
-    //             assert.isObject(info, 'info должен быть объектом');
-    //             assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-    //             assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-    //             assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-    //             assert.deepEqual(targetInfo.nodes, info.nodes);
-    //             done();
-    //         };
-    //         let elementToInsert1 = document.createElement('div');
-    //         let elementToInsert2 = document.createElement('div');
-    //         let elementToInsert3 = document.createElement('div');
-    //         let targetInfo = {
-    //             type: 'insert',
-    //             nodes: [elementToInsert1, elementToInsert2, elementToInsert3]
-    //         };
-    //         let fragment = new DocumentFragment();
-    //
-    //         document.body.appendChild(where);
-    //
-    //         fragment.appendChild(elementToInsert1);
-    //         fragment.appendChild(elementToInsert2);
-    //         fragment.appendChild(elementToInsert3);
-    //
-    //         observeChildNodes(where, fn);
-    //         where.appendChild(fragment);
-    //
-    //         document.body.removeChild(where);
-    //     });
-    //
-    //     it('должна вызывать fn при удалении элементов из указанного элемента', done => {
-    //         let where = document.createElement('div');
-    //         let fn = info => {
-    //             assert.isObject(info, 'info должен быть объектом');
-    //             assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-    //             assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-    //             assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-    //             assert.deepEqual(targetInfo.nodes, info.nodes);
-    //             done();
-    //         };
-    //         let elementToRemove = document.createElement('div');
-    //         let targetInfo = {
-    //             type: 'remove',
-    //             nodes: [elementToRemove]
-    //         };
-    //
-    //         document.body.appendChild(where);
-    //
-    //         where.appendChild(elementToRemove);
-    //         observeChildNodes(where, fn);
-    //         where.removeChild(elementToRemove);
-    //
-    //         document.body.removeChild(where);
-    //     });
-    //
-    //     it('должна вызывать fn при удалении множества элементов из указанного элемента', done => {
-    //         let where = document.createElement('div');
-    //         let fn = info => {
-    //             assert.isObject(info, 'info должен быть объектом');
-    //             assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
-    //             assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
-    //             assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
-    //             assert.deepEqual(targetInfo.nodes, info.nodes);
-    //             done();
-    //         };
-    //         let elementToRemove1 = document.createElement('div');
-    //         let elementToRemove2 = document.createElement('div');
-    //         let elementToRemove3 = document.createElement('div');
-    //         let targetInfo = {
-    //             type: 'remove',
-    //             nodes: [elementToRemove1, elementToRemove2, elementToRemove3]
-    //         };
-    //
-    //         document.body.appendChild(where);
-    //
-    //         where.appendChild(elementToRemove1);
-    //         where.appendChild(elementToRemove2);
-    //         where.appendChild(elementToRemove3);
-    //
-    //         observeChildNodes(where, fn);
-    //         where.innerHTML = '';
-    //
-    //         document.body.removeChild(where);
-    //     });
-    // });
+    describe('collectDOMStat', () => {
+        it('должна вернуть статистику по переданному дереву', () => {
+            let where = document.createElement('div');
+            let class1 = `class-${random('number')}`;
+            let class2 = `class-${random('number')}-${random('number')}`;
+            let text1 = random('string');
+            let text2 = random('string');
+            let stat = {
+                tags: { P: 1, B: 2 },
+                classes: { [class1]: 2, [class2]: 1 },
+                texts: 3
+            };
+            let result;
+
+            where.innerHTML = `<p class="${class1}"><b>${text1}</b> <b class="${class1} ${class2}">${text2}</b></p>`;
+            result = collectDOMStat(where);
+            assert.deepEqual(result, stat);
+        });
+    });
+
+    describe('observeChildNodes', () => {
+        it('должна вызывать fn при добавлении элементов в указанный элемент', done => {
+            let where = document.createElement('div');
+            let fn = info => {
+                assert.isObject(info, 'info должен быть объектом');
+                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
+                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
+                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
+                assert.deepEqual(targetInfo.nodes, info.nodes);
+                done();
+            };
+            let elementToInsert = document.createElement('div');
+            let targetInfo = {
+                type: 'insert',
+                nodes: [elementToInsert]
+            };
+
+            document.body.appendChild(where);
+
+            observeChildNodes(where, fn);
+            where.appendChild(elementToInsert);
+
+            document.body.removeChild(where);
+        });
+
+        it('должна вызывать fn при добавлении множества элементов в указанный элемент', done => {
+            let where = document.createElement('div');
+            let fn = info => {
+                assert.isObject(info, 'info должен быть объектом');
+                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
+                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
+                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
+                assert.deepEqual(targetInfo.nodes, info.nodes);
+                done();
+            };
+            let elementToInsert1 = document.createElement('div');
+            let elementToInsert2 = document.createElement('div');
+            let elementToInsert3 = document.createElement('div');
+            let targetInfo = {
+                type: 'insert',
+                nodes: [elementToInsert1, elementToInsert2, elementToInsert3]
+            };
+            let fragment = new DocumentFragment();
+
+            document.body.appendChild(where);
+
+            fragment.appendChild(elementToInsert1);
+            fragment.appendChild(elementToInsert2);
+            fragment.appendChild(elementToInsert3);
+
+            observeChildNodes(where, fn);
+            where.appendChild(fragment);
+
+            document.body.removeChild(where);
+        });
+
+        it('должна вызывать fn при удалении элементов из указанного элемента', done => {
+            let where = document.createElement('div');
+            let fn = info => {
+                assert.isObject(info, 'info должен быть объектом');
+                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
+                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
+                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
+                assert.deepEqual(targetInfo.nodes, info.nodes);
+                done();
+            };
+            let elementToRemove = document.createElement('div');
+            let targetInfo = {
+                type: 'remove',
+                nodes: [elementToRemove]
+            };
+
+            document.body.appendChild(where);
+
+            where.appendChild(elementToRemove);
+            observeChildNodes(where, fn);
+            where.removeChild(elementToRemove);
+
+            document.body.removeChild(where);
+        });
+
+        it('должна вызывать fn при удалении множества элементов из указанного элемента', done => {
+            let where = document.createElement('div');
+            let fn = info => {
+                assert.isObject(info, 'info должен быть объектом');
+                assert.equal(info.type, targetInfo.type, `info.type должен быть равен ${targetInfo.type}`);
+                assert.isTrue(Array.isArray(info.nodes), 'info.nodes должен быть массивом');
+                assert.equal(info.nodes.length, targetInfo.nodes.length, 'некорректный размер info.nodes');
+                assert.deepEqual(targetInfo.nodes, info.nodes);
+                done();
+            };
+            let elementToRemove1 = document.createElement('div');
+            let elementToRemove2 = document.createElement('div');
+            let elementToRemove3 = document.createElement('div');
+            let targetInfo = {
+                type: 'remove',
+                nodes: [elementToRemove1, elementToRemove2, elementToRemove3]
+            };
+
+            document.body.appendChild(where);
+
+            where.appendChild(elementToRemove1);
+            where.appendChild(elementToRemove2);
+            where.appendChild(elementToRemove3);
+
+            observeChildNodes(where, fn);
+            where.innerHTML = '';
+
+            document.body.removeChild(where);
+        });
+    });
 });
