@@ -196,7 +196,9 @@ function collectDOMStat(root) {
                         }
                     }
                 }
+            }
 
+            if (elements[i].nodeType === 1) {
                 // считаем теги
                 let elementTag = elements[i].tagName;
 
@@ -205,9 +207,7 @@ function collectDOMStat(root) {
                 } else {
                     stats.tags[elementTag] = 1;
                 }
-            }
 
-            if (elements[i].nodeType === 1) {
                 fnCollection(elements[i]);
             }
         }
