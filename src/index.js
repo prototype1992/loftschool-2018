@@ -174,19 +174,47 @@ function collectDOMStat(root) {
         texts: 0
     };
 
-    let elements = root.childNodes;
+    function fnCollection(root) {
+        // получаем все узлы
+        let elements = root.childNodes; // +
 
-    for (let i = 0; i < elements.length; i++) {
-        switch (elements[i].nodeType) {
-            case 1:
-                stats.tags[i] = elements[i].tagName;
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+        // проходимся циклом по elements
+        for (let i = 0; i < elements.length; i++) {
+            // если элемент текст
+            if (elements[i].nodeType === 3) {
+                stats.texts = stats.texts + 1;
+            } else {
+                // считаем классы
+                let elementClasses = elements[i].classList;
+
+                if (elementClasses.length > 0) {
+                    for (let i = 0; i < elementClasses.length; i++) {
+                        if (elementClasses[i] in stats.classes) {
+                            stats.classes[elementClasses[i]] = stats.classes[elementClasses[i]] + 1;
+                        } else {
+                            stats.classes[elementClasses[i]] = 1;
+                        }
+                    }
+                }
+
+                // считаем теги
+                let elementTag = elements[i].tagName;
+
+                if (elementTag in stats.tags) {
+                    stats.tags[elementTag] = stats.tags[elementTag] + 1;
+                } else {
+                    stats.tags[elementTag] = 1;
+                }
+            }
+
+            if (elements[i].nodeType === 1) {
+                fnCollection(elements[i]);
+            }
         }
+
     }
+
+    fnCollection(root);
 
     return stats;
 }
@@ -255,7 +283,7 @@ function observeChildNodes(where, fn) {
         });
     });
 
-    observer.observe(where, {
+    obServer.observe(where, {
         childList: true,
         subtree: true
     });
