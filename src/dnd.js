@@ -29,21 +29,31 @@ const homeworkContainer = document.querySelector('#homework-container');
    homeworkContainer.appendChild(newDiv);
  */
 function createDiv() {
+    function random(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    function randomColor() {
+        return Math.floor(Math.random()*16777215).toString(16);
+    }
+
     let newDiv = document.createElement('div');
 
     newDiv.classList.add('draggable-div');
 
-    newDiv.style.width = '200px';
-    newDiv.style.height = '45px';
+    let randomHeight = random(40, 100) + 'px';
+
+    newDiv.style.width = random(200, 300) + 'px';
+    newDiv.style.height = randomHeight;
 
     newDiv.style.position = 'absolute';
-    newDiv.style.top = '45px';
-    newDiv.style.left = '45px';
+    newDiv.style.top = random(10, 200)+'px';
+    newDiv.style.left = random(10, 200)+'px';
 
-    newDiv.style.backgroundColor = '#333';
-    newDiv.style.color = '#fff';
+    newDiv.style.backgroundColor = '#'+randomColor();
+    newDiv.style.color = '#'+randomColor();
     newDiv.style.textAlign = 'center';
-    newDiv.style.lineHeight = '45px';
+    newDiv.style.lineHeight = randomHeight;
 
     newDiv.textContent = 'Текст';
 
@@ -61,31 +71,35 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
-    let x = '';
-    let y = '';
+    function getCoords(elem) {
+        let box = elem.getBoundingClientRect();
 
-    function moveDragStart(event) {
-        // записываем координаты
-        x = event.offsetX;
-        y = event.offsetY;
+        return {
+            top: box.top + pageYOffset,
+            left: box.left + pageXOffset
+        }
     }
 
-    function moveDragOver(event) {
-        event.preventDefault();
-    }
+    target.addEventListener('mousedown', function (event) {
+        let x = event.pageX - getCoords(target).left;
+        let y = event.pageY - getCoords(target).top;
 
-    function moveDrop(event) {
-        event.preventDefault();
+        function targetMove(event) {
+            console.log(event);
+            target.style.left = event.pageX - x + 'px';
+            target.style.top = event.pageY - y + 'px';
+        }
 
-        // применяем стили от координат
-        target.style.left = event.pageX / x + 'px';
-        target.style.top = event.pageY / y + 'px';
-    }
+        targetMove(event);
 
-    // вызываем события
-    target.addEventListener('dragstart', moveDragStart);
-    target.addEventListener('dragover', moveDragOver);
-    target.addEventListener('drop', moveDrop);
+        document.addEventListener('mousemove', targetMove);
+
+        target.addEventListener('mouseup', () => {
+            document.removeEventListener('mousemove', targetMove);
+        });
+
+        target.addEventListener('dragstart', event => event.preventDefault());
+    })
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
