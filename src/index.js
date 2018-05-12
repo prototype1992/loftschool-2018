@@ -47,6 +47,8 @@ function skipDefault(eventName, target) {
    emulateClick(document.querySelector('a')) // для указанного элемента должно быть сэмулировано события click
  */
 function emulateClick(target) {
+    let myEvent = new Event('click');
+    target.dispatchEvent(myEvent);
 }
 
 /*
@@ -56,21 +58,47 @@ function emulateClick(target) {
  который реагирует (вызывает fn) только на клики по элементам BUTTON внутри target
 
  Пример:
-   delegate(document.body, () => console.log('кликнули на button')) // добавит такой обработчик кликов для body, который будет вызывать указанную функцию только если кликнули на кнопку (элемент с тегом button)
+   delegate(document.body, () => console.log('кликнули на button'))
+   // добавит такой обработчик кликов для body,
+   который будет вызывать указанную функцию только если кликнули на кнопку (элемент с тегом button)
  */
 function delegate(target, fn) {
+    function handleEvent(event) {
+        // если элемент кнопка
+        if (event.target.tagName === 'BUTTON') {
+            fn()
+        }
+    }
+    target.addEventListener('click', handleEvent);
 }
 
 /*
  Задание 6:
 
  Функция должна добавить такой обработчик кликов к элементу target,
- который сработает только один раз и удалится (перестанет срабатывать для последующих кликов по указанному элементу)
+ который сработает только один раз и удалится (перестанет срабатывать для последующих кликов
+ по указанному элементу)
 
  Пример:
-   once(document.querySelector('button'), () => console.log('обработчик выполнился!')) // добавит такой обработчик кликов для указанного элемента, который вызовется только один раз и затем удалится
+   once(document.querySelector('button'), () => console.log('обработчик выполнился!'))
+   // добавит такой обработчик кликов для указанного элемента, который вызовется только
+   один раз и затем удалится
  */
 function once(target, fn) {
+    let eventSwitch = false;
+
+    function handleEvent() {
+        if (!eventSwitch) {
+            // вызываем функции
+            fn();
+            // меня флаг
+            eventSwitch = true;
+            // удаляем событие
+            target.removeEventListener('click', handleEvent);
+        }
+    }
+
+    target.addEventListener('click', handleEvent);
 }
 
 export {

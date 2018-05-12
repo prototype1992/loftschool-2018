@@ -4,7 +4,8 @@
  Создайте страницу с кнопкой.
  При нажатии на кнопку должен создаваться div со случайными размерами, цветом и позицией на экране
  Необходимо предоставить возможность перетаскивать созданные div при помощи drag and drop
- Запрещено использовать сторонние библиотеки. Разрешено пользоваться только тем, что встроено в браузер
+ Запрещено использовать сторонние библиотеки.
+ Разрешено пользоваться только тем, что встроено в браузер
  */
 
 /*
@@ -18,7 +19,8 @@
 const homeworkContainer = document.querySelector('#homework-container');
 
 /*
- Функция должна создавать и возвращать новый div с классом draggable-div и случайными размерами/цветом/позицией
+ Функция должна создавать и возвращать новый div с классом draggable-div
+ и случайными размерами/цветом/позицией
  Функция должна только создавать элемент и задвать ему случайные размер/позицию/цвет
  Функция НЕ должна добавлять элемент на страницу. На страницу элемент добавляется отдельно
 
@@ -27,6 +29,27 @@ const homeworkContainer = document.querySelector('#homework-container');
    homeworkContainer.appendChild(newDiv);
  */
 function createDiv() {
+    let newDiv = document.createElement('div');
+
+    newDiv.classList.add('draggable-div');
+
+    newDiv.style.width = '200px';
+    newDiv.style.height = '45px';
+
+    newDiv.style.position = 'absolute';
+    newDiv.style.top = '45px';
+    newDiv.style.left = '45px';
+
+    newDiv.style.backgroundColor = '#333';
+    newDiv.style.color = '#fff';
+    newDiv.style.textAlign = 'center';
+    newDiv.style.lineHeight = '45px';
+
+    newDiv.textContent = 'Текст';
+
+    newDiv.setAttribute('draggable', 'true');
+
+    return newDiv;
 }
 
 /*
@@ -38,6 +61,31 @@ function createDiv() {
    addListeners(newDiv);
  */
 function addListeners(target) {
+    let x = '';
+    let y = '';
+
+    function moveDragStart(event) {
+        // записываем координаты
+        x = event.offsetX;
+        y = event.offsetY;
+    }
+
+    function moveDragOver(event) {
+        event.preventDefault();
+    }
+
+    function moveDrop(event) {
+        event.preventDefault();
+
+        // применяем стили от координат
+        target.style.left = event.pageX / x + 'px';
+        target.style.top = event.pageY / y + 'px';
+    }
+
+    // вызываем события
+    target.addEventListener('dragstart', moveDragStart);
+    target.addEventListener('dragover', moveDragOver);
+    target.addEventListener('drop', moveDrop);
 }
 
 let addDivButton = homeworkContainer.querySelector('#addDiv');
