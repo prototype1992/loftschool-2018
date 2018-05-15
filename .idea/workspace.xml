@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ac1a32e-0ca9-4aa6-8655-7e96e2999184" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/helpers.js" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" afterPath="$PROJECT_DIR$/src/index.js" />
       <change beforePath="$PROJECT_DIR$/src/towns.js" afterPath="$PROJECT_DIR$/src/towns.js" />
-      <change beforePath="$PROJECT_DIR$/towns-content.hbs" afterPath="$PROJECT_DIR$/towns-content.hbs" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,12 +20,12 @@
       <file leaf-file-name="towns.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/towns.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="750">
-              <caret line="122" column="3" lean-forward="true" selection-start-line="122" selection-start-column="3" selection-end-line="122" selection-end-column="3" />
+            <state relative-caret-position="286">
+              <caret line="104" column="4" lean-forward="false" selection-start-line="104" selection-start-column="4" selection-end-line="104" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#1341#1592#0" expanded="false" />
-                <marker date="1526409080166" expanded="true" signature="4131:4277" ph="..." />
+                <marker date="1526409520835" expanded="true" signature="4015:4161" ph="..." />
               </folding>
             </state>
           </provider>
@@ -104,8 +101,8 @@
         <option value="$PROJECT_DIR$/src/dnd.js" />
         <option value="$PROJECT_DIR$/src/helpers.js" />
         <option value="$PROJECT_DIR$/towns-content.hbs" />
-        <option value="$PROJECT_DIR$/src/towns.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/towns.js" />
       </list>
     </option>
   </component>
@@ -286,7 +283,7 @@
       <workItem from="1525805116872" duration="8035000" />
       <workItem from="1526111442350" duration="3175000" />
       <workItem from="1526126473492" duration="4091000" />
-      <workItem from="1526402076300" duration="5627000" />
+      <workItem from="1526402076300" duration="5813000" />
     </task>
     <task id="LOCAL-00001" summary="правки">
       <created>1525187374570</created>
@@ -407,7 +404,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526406551697</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="на проверку Игорю 2">
+      <created>1526409113820</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1526409113820</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -416,7 +420,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38757000" />
+    <option name="totallyTimeSpent" value="38943000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -495,7 +499,8 @@
     <MESSAGE value="сделал задание 5" />
     <MESSAGE value="сделал задание 5 доработка" />
     <MESSAGE value="на проверку Игорю" />
-    <option name="LAST_COMMIT_MESSAGE" value="на проверку Игорю" />
+    <MESSAGE value="на проверку Игорю 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="на проверку Игорю 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -823,12 +828,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/towns.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="750">
-          <caret line="122" column="3" lean-forward="true" selection-start-line="122" selection-start-column="3" selection-end-line="122" selection-end-column="3" />
+        <state relative-caret-position="286">
+          <caret line="104" column="4" lean-forward="false" selection-start-line="104" selection-start-column="4" selection-end-line="104" selection-end-column="4" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#1341#1592#0" expanded="false" />
-            <marker date="1526409080166" expanded="true" signature="4131:4277" ph="..." />
+            <marker date="1526409520835" expanded="true" signature="4015:4161" ph="..." />
           </folding>
         </state>
       </provider>

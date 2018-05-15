@@ -98,27 +98,19 @@ function loadTownsReject() {
 // загружаем города
 loadTowns()
     .then(
-        data => {
-            loadTownsResolve();
-        }
+        data => loadTownsResolve()
     )
     .catch(
-        error => {
-            loadTownsReject();
-        }
+        error => loadTownsReject()
     );
 
 failedBtn.addEventListener('click', () => {
     loadTowns()
         .then(
-            data => {
-                loadTownsResolve();
-            }
+            data => loadTownsResolve()
         )
         .catch(
-            error => {
-                loadTownsReject();
-            }
+            error => loadTownsReject()
         );
 });
 
