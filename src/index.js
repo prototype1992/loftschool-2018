@@ -1,3 +1,5 @@
+import {sortFn} from './helpers';
+
 /* ДЗ 6 - Асинхронность и работа с сетью */
 
 /*
@@ -31,8 +33,8 @@ function delayPromise(seconds) {
    .then(towns => console.log(towns)) // должна вывести в консоль отсортированный массив городов
  */
 function loadAndSortTowns() {
-    let url = 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json5';
-    return new Promise( (resolve, reject) => {
+    let url = 'https://raw.githubusercontent.com/smelukov/citiesTest/master/cities.json';
+    return new Promise((resolve, reject) => {
         // 1. Создаём новый объект XMLHttpRequest
         let xhr = new XMLHttpRequest();
         // 2. Конфигурируем его: GET-запрос на URL
@@ -41,20 +43,15 @@ function loadAndSortTowns() {
         xhr.send();
 
         xhr.addEventListener('load', function () {
-            let cities = JSON.parse( this.response );
-
-            function sortIng(current, next) {
-                if( current.name > next.name ) {
-                    return 1;
-                } else if ( current.name < next.name ) {
-                    return -1;
-                } else {
-                    return 0;
-                }
-            }
-
             if (xhr.status === 200) {
-                resolve( cities.sort(sortIng) );
+                let cities = null;
+                try {
+                    cities = JSON.parse(this.response);
+                } catch (e) {
+                    throw new Error('Парсинг не удался')
+                }
+
+                resolve(cities.sort(sortFn));
             } else {
                 reject(this.statusText);
             }

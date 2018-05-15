@@ -57,7 +57,7 @@ function loadTowns() {
 function isMatching(full, chunk) {
     full = full.toLowerCase();
     chunk = chunk.toLowerCase();
-    if( full.indexOf(chunk) + 1 ) {
+    if (full.indexOf(chunk) + 1) {
         return true;
     }
     return false;
@@ -72,32 +72,55 @@ const filterInput = homeworkContainer.querySelector('#filter-input');
 /* Блок с результатами поиска */
 const filterResult = homeworkContainer.querySelector('#filter-result');
 
+/*failed*/
+const failedBlock = homeworkContainer.querySelector('#failed');
+const failedBtn = homeworkContainer.querySelector('#failed-btn');
+
 // создаем массив для городов
 let cities = [];
+
+function loadTownsResolve(data) {
+    // добавляем города в массив
+    cities = data;
+    // показываем блок с поиском
+    filterBlock.style.display = 'block';
+    // скрываем блок загрузка...
+    loadingBlock.style.display = 'none';
+}
+
+function loadTownsReject() {
+    // скрываем блок с поиском
+    filterBlock.style.display = 'none';
+    // показываем блок ошибки
+    failedBlock.style.display = 'block';
+}
 
 // загружаем города
 loadTowns()
     .then(
         data => {
-            // добавляем города в массив
-            cities = data;
-            // показываем блок с поиском
-            filterBlock.style.display = 'block';
-            // скрываем блок загрузка...
-            loadingBlock.style.display = 'none';
+            loadTownsResolve();
         }
     )
     .catch(
         error => {
-            // скрываем блок с поиском
-            // filterBlock.style.display = 'none';
-            // показываем блок загрузка...
-            // loadingBlock.style.display = 'block';
-            alert('Не удалось загрузить города');
+            loadTownsReject();
         }
     );
 
-console.log('cities', cities);
+failedBtn.addEventListener('click', () => {
+    loadTowns()
+        .then(
+            data => {
+                loadTownsResolve();
+            }
+        )
+        .catch(
+            error => {
+                loadTownsReject();
+            }
+        );
+});
 
 filterInput.addEventListener('keyup', event => {
     // получаем значение введенное в поле поиска
