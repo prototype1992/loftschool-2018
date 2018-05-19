@@ -40,6 +40,13 @@
    const newDiv = document.createElement('div');
    homeworkContainer.appendChild(newDiv);
  */
+import {
+    renderCookies,
+    deleteCookie,
+    isMatching
+} from './helpers';
+
+
 const homeworkContainer = document.querySelector('#homework-container');
 // текстовое поле для фильтрации cookie
 const filterNameInput = homeworkContainer.querySelector('#filter-name-input');
@@ -54,46 +61,42 @@ const listTable = homeworkContainer.querySelector('#list-table tbody');
 
 filterNameInput.addEventListener('keyup', function() {
     // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
+    let value = filterNameInput.value;
+
+    let cookies = document.cookie.split('; ');
+    console.log('cookies', cookies);
+
+    if (value) {
+        let searchArray = [];
+        for (let item of cookies) {
+            if (isMatching(item, value)) {
+                searchArray.push(item);
+            }
+        }
+        console.log('searchArray', searchArray);
+        renderCookies(listTable, searchArray);
+    } else {
+        renderCookies(listTable, document.cookie.split('; '));
+    }
 });
 
 addButton.addEventListener('click', () => {
     // здесь можно обработать нажатие на кнопку "добавить cookie"
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
     // рендерим
-    renderCookies();
+    renderCookies(listTable, document.cookie.split('; '));
 });
 
 listTable.addEventListener('click', event => {
-    let element = event.target;
-    if (element.classList.contains('cookie-delete')) {
+    if (event.target.classList.contains('cookie-delete')) {
         // получаем дата атрибут имени куки
-        let dataName = element.getAttribute('data-name');
+        let dataName = event.target.getAttribute('data-name');
         // удаляем
         deleteCookie(dataName);
         // рендерим таблицу
-        renderCookies();
+        renderCookies(listTable, document.cookie.split('; '));
     }
 });
 
-renderCookies();
-
-function renderCookies() {
-    let cookiesArray = document.cookie.split(';');
-    listTable.innerHTML = '';
-    let wrap = '';
-
-    for (let item of cookiesArray) {
-        let result = item.split('=');
-        wrap += `<tr>
-<td>${result[0].trim()}</td>
-<td>${result[1].trim()}</td>
-<td><button class="cookie-delete" data-name="${result[0].trim()}">Удалить</button></td>
-<tr>`;
-    }
-    listTable.innerHTML = wrap;
-}
-
-function deleteCookie(name) {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-}
+renderCookies(listTable, document.cookie.split('; '));
 
