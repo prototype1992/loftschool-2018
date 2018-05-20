@@ -17,7 +17,7 @@ export function renderCookies(list, cookies) {
 }
 
 export function deleteCookie(name) {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    document.cookie = `${name}=; expires=${new Date(0)}`;
 }
 
 // функция поиска подстроки в строке
@@ -29,4 +29,13 @@ export function isMatching(full, chunk) {
     } else {
         return false;
     }
+}
+
+// parse cookies
+export function parseCookie() {
+    return document.cookie.split('; ').reduce((prev, current) => {
+        let [name, value] = current.split('=');
+        prev[name] = value;
+        return prev;
+    }, {});
 }

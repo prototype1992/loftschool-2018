@@ -59,7 +59,7 @@ const addButton = homeworkContainer.querySelector('#add-button');
 // таблица со списком cookie
 const listTable = homeworkContainer.querySelector('#list-table tbody');
 
-filterNameInput.addEventListener('keyup', function() {
+filterNameInput.addEventListener('keyup', function () {
     // здесь можно обработать нажатия на клавиши внутри текстового поля для фильтрации cookie
     let value = filterNameInput.value;
 
@@ -81,10 +81,34 @@ filterNameInput.addEventListener('keyup', function() {
 });
 
 addButton.addEventListener('click', () => {
-    // здесь можно обработать нажатие на кнопку "добавить cookie"
+    if (addNameInput.value === '' || addValueInput.value === '') {
+        console.log('addNameInput.value', addNameInput.value);
+        console.log('addNameInput.value', Boolean(addNameInput.value));
+        console.log('addValueInput.value', addValueInput.value);
+        console.log('addValueInput.value', Boolean(addValueInput.value));
+        console.log('Поля пустые, заполните');
+        return false;
+    }
+    // добавляем в куки
     document.cookie = `${addNameInput.value}=${addValueInput.value}`;
-    // рендерим
-    renderCookies(listTable, document.cookie.split('; '));
+    // получаем значение поиска
+    let value = filterNameInput.value;
+    if (value) {
+        let cookies = document.cookie.split('; ');
+        let searchArray = [];
+        for (let item of cookies) {
+            if (isMatching(item, value)) {
+                searchArray.push(item);
+            }
+        }
+        renderCookies(listTable, searchArray);
+    } else {
+        // рендерим
+        renderCookies(listTable, document.cookie.split('; '));
+    }
+    // очищаем поля
+    addNameInput.value = '';
+    addValueInput.value = ''
 });
 
 listTable.addEventListener('click', event => {
